@@ -3,6 +3,9 @@
 use Laravel\Sanctum\Sanctum;
 
 return [
+    'guard' => 'api',
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost,127.0.0.1')),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -79,5 +82,6 @@ return [
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
     ],
+    
 
 ];

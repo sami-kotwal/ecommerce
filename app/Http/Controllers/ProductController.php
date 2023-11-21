@@ -29,6 +29,7 @@ $product = Product::all();
             'price'=>'required|numeric',
             'quantity'=>'required',
             'availability'=>'required',
+            'cat_id'=>'required'
 
         ]);
         if($validator->fails())
@@ -44,6 +45,7 @@ $product = Product::all();
         else
         {
             $product = new Product;
+            $product->cat_id=$request->cat_id;
             $product->name=$request->name;
             $product->description=$request->description;
             $product->price=$request->price;
