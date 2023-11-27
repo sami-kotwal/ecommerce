@@ -28,3 +28,8 @@ Route::post('register',[UsersController::class,'register']);
 Route::post('login',[UsersController::class,'login']);
 
 Route::post('logout',[UsersController::class,'logout']);
+
+te::get('category/fetch',[CategoryController::class,'index']);
+Route::post('category/Add',[CategoryController::class,'store']);
+Route::put('category/Edit/{id}',[CategoryController::class,'edit']);
+Route::delete('category/Delete/{id}',[CategoryController::class,'delete']);

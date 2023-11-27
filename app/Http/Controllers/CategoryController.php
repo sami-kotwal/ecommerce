@@ -1,21 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Product;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\category;
+use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     public function index()
     {
-$product = Product::all();
+$category = category::all();
         $data = 
         [
               "status"=>200,
-              "product"=>$product
+              "category"=>$category
         ];
         return response()->json($data,200);
     }
@@ -25,12 +23,6 @@ $product = Product::all();
         $validator = Validator::make($request->all(),
         [
             'name'=>'required',
-            'description'=>'required',
-            'price'=>'required|numeric',
-            'quantity'=>'required',
-            'availability'=>'required',
-            'cat_id'=>'required'
-
         ]);
         if($validator->fails())
         {
@@ -44,22 +36,16 @@ $product = Product::all();
         
         else
         {
-            $product = new Product;
-            $product->cat_id=$request->cat_id;
-            $product->name=$request->name;
-            $product->description=$request->description;
-            $product->price=$request->price;
-            $product->naquantityme=$request->quantity;
-            $product->availability=$request->availability;
-            $product->save();
-            
-            
+            $category = new Product;
+            $category->name=$request->name;
+            $category->save();
+
             
             $data=
             [
 
                 "status"=>200,
-                "message"=>"Prodeut Uploaded Successfully!"
+                "message"=>"Category Uploaded Successfully!"
             ];
             return response()->json($data,200);
         }
@@ -70,12 +56,7 @@ $product = Product::all();
         $validator = Validator::make($request->all(),
         [
             'name'=>'required',
-            'description'=>'required',
-            'price'=>'required|numeric',
-            'quantity'=>'required',
-            'availability'=>'required',
-            'cat_id'=>'required'
-
+            
         ]);
         if($validator->fails())
         {
@@ -89,22 +70,15 @@ $product = Product::all();
         
         else
         {
-            $product = Product::find($id);
-            $product->cat_id=$request->cat_id;
-            $product->name=$request->name;
-            $product->description=$request->description;
-            $product->price=$request->price;
-            $product->naquantityme=$request->quantity;
-            $product->availability=$request->availability;
-            $product->save();
-            
-            
-            
+            $category = Product::find($id);
+            $category->name=$request->name;
+            $category->save();
+        
             $data=
             [
 
                 "status"=>200,
-                "message"=>"Prodeut Updated Successfully!"
+                "message"=>"Category Updated Successfully!"
             ];
             return response()->json($data,200);
         }
@@ -114,8 +88,8 @@ $product = Product::all();
     public function delete($id)
     
     {
-        $product = Product::find($id);
-        $product->delete();
+        $category = caregory::find($id);
+        $category->delete();
 
 $data =
 [
@@ -126,6 +100,4 @@ $data =
         return response()->json($data,200);
     }
   
-
-
 }
