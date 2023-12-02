@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    public function index()
+    {
+$user = User::all();
+        $data = 
+        [
+              "status"=>200,
+              "category"=>$user
+        ];
+        return response()->json($data,200);
+    }
+
     public function login(Request $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
@@ -75,6 +86,21 @@ $data=[
             'message'=>'Logout SuccessFully',
             'status'=>200
             ];
+        return response()->json($data,200);
+    }
+
+    public function delete($id)
+    
+    {
+        $user = User::find($id);
+        $user->delete();
+
+$data =
+[
+    "status"=>200,
+    "message"=>"Data Deleted Successfull!"
+];
+
         return response()->json($data,200);
     }
 }

@@ -1,13 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Validator;
+
+use App\Models\Product;
 use App\Models\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class CategoryController extends Controller
 {
-    public function index()
+    
+
+
+
+    public function Index()
     {
 $category = category::all();
         $data = 
@@ -18,7 +25,7 @@ $category = category::all();
         return response()->json($data,200);
     }
 
-    public function store(Request $request)
+    public function Store(Request $request)
     {
         $validator = Validator::make($request->all(),
         [
@@ -33,10 +40,9 @@ $category = category::all();
             ];
             return response()->json($data,400);
         }
-        
         else
         {
-            $category = new Product;
+            $category = new category;
             $category->name=$request->name;
             $category->save();
 
@@ -70,7 +76,7 @@ $category = category::all();
         
         else
         {
-            $category = Product::find($id);
+            $category = category::find($id);
             $category->name=$request->name;
             $category->save();
         
@@ -88,7 +94,7 @@ $category = category::all();
     public function delete($id)
     
     {
-        $category = caregory::find($id);
+        $category = category::find($id);
         $category->delete();
 
 $data =
@@ -99,5 +105,4 @@ $data =
 
         return response()->json($data,200);
     }
-  
 }

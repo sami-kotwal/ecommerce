@@ -17,7 +17,7 @@ $product = Product::all();
               "status"=>200,
               "product"=>$product
         ];
-        return response()->json($data,200);
+        
     }
 
     public function store(Request $request)
@@ -28,8 +28,7 @@ $product = Product::all();
             'description'=>'required',
             'price'=>'required|numeric',
             'quantity'=>'required',
-            'availability'=>'required',
-            'cat_id'=>'required'
+            'cat_id'=>'return response()->json($data,200);required'
 
         ]);
         if($validator->fails())
@@ -37,7 +36,8 @@ $product = Product::all();
             $data= 
             [
                 "status"=>400,
-                "message"=>$validator->messages()
+                "message"=>$validator->messages(),
+                "product"=>$product
             ];
             return response()->json($data,400);
         }
@@ -49,8 +49,7 @@ $product = Product::all();
             $product->name=$request->name;
             $product->description=$request->description;
             $product->price=$request->price;
-            $product->naquantityme=$request->quantity;
-            $product->availability=$request->availability;
+            $product->quantity=$request->quantity;
             $product->save();
             
             
@@ -73,7 +72,6 @@ $product = Product::all();
             'description'=>'required',
             'price'=>'required|numeric',
             'quantity'=>'required',
-            'availability'=>'required',
             'cat_id'=>'required'
 
         ]);
@@ -82,7 +80,8 @@ $product = Product::all();
             $data= 
             [
                 "status"=>400,
-                "message"=>$validator->messages()
+                "message"=>$validator->messages(),
+                "product"=>$product
             ];
             return response()->json($data,400);
         }
@@ -94,8 +93,8 @@ $product = Product::all();
             $product->name=$request->name;
             $product->description=$request->description;
             $product->price=$request->price;
-            $product->naquantityme=$request->quantity;
-            $product->availability=$request->availability;
+            $product->quantity=$request->quantity;
+          
             $product->save();
             
             
